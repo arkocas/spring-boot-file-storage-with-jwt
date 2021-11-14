@@ -1,0 +1,297 @@
+{
+	"info": {
+		"_postman_id": "1e3cb56d-019a-41f8-a39e-94aa3a2626ec",
+		"name": "spring-boot-file-storage-with-jwt",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/login",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\":\"test1\",\n\"password\":\"pass1\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/login",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"login"
+					]
+				},
+				"description": "Login olma işlemi. Login olmak için veritabanında bulunan kullanıcı bilgileriyle girilen bilgilerin eşleşmesi gerekmektedir. Response olarak Bearer token döner."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/user/create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"username\":\"alirizakocas\",\n\"password\":\"pass1234\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/user/create",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"create"
+					]
+				},
+				"description": "Yeni kullanıcı ekleme işlemi. username ve password bilgisiyle gerçekleştirilir. username ve password'un en az 8 karakterden oluşmasına dikkat edilmesi gerekmektedir."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/file/upload",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTYzNjkzMzA5MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2xvZ2luIiwiaWF0IjoxNjM2OTMxODkyfQ.E11fAYWBUMwV5d-QiErIJ6hakr0AIEr4_M7dYqshJmM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/alirizakocas/Downloads/Adobe Scan 08 Eyl 2021 (1).pdf"
+						}
+					]
+				},
+				"url": {
+					"raw": "localhost:8080/file/upload",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"upload"
+					]
+				},
+				"description": "Dosya yükleme işlemi. Yüklenen dosya bilgileri veritabanına eklenirken, dosyanın kendisi de fileId bilgisiyle lokalimizde tutulur. Bu işlemi gerçekleştirme için geçerli bir bearer token girilmelidir. Token'a ait username bilgisi de veritabanında tutulur."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/file/detail/948be974-ef8b-4c75-a08a-465f078fe0d5",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTYzNjkzMzA5MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2xvZ2luIiwiaWF0IjoxNjM2OTMxODkyfQ.E11fAYWBUMwV5d-QiErIJ6hakr0AIEr4_M7dYqshJmM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/file/detail/948be974-ef8b-4c75-a08a-465f078fe0d5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"detail",
+						"948be974-ef8b-4c75-a08a-465f078fe0d5"
+					]
+				},
+				"description": "Dosya bilgilerini getirme işlemi. Get isteği gönderirken login işleminde aldığımız token bilgisini de göndermeliyiz. Eğer erişmeye çalıştığımız dosyanın sahibi biz değilsek bilgileri göremeyiz, hata alırız."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/file/download/948be974-ef8b-4c75-a08a-465f078fe0d5",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTYzNjkzMzA5MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2xvZ2luIiwiaWF0IjoxNjM2OTMxODkyfQ.E11fAYWBUMwV5d-QiErIJ6hakr0AIEr4_M7dYqshJmM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/file/download/948be974-ef8b-4c75-a08a-465f078fe0d5",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"download",
+						"948be974-ef8b-4c75-a08a-465f078fe0d5"
+					]
+				},
+				"description": "Dosya indirme işlemi. Get isteği gönderirken login işleminde aldığımız token bilgisini de göndermeliyiz. Eğer erişmeye çalıştığımız dosyanın sahibi biz değilsek dosyaya erişemeyiz."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/file/updateFileName?fileId=948be974-ef8b-4c75-a08a-465f078fe0d5&fileName=dosyanin_yeni_ismi",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTYzNjkzMzA5MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2xvZ2luIiwiaWF0IjoxNjM2OTMxODkyfQ.E11fAYWBUMwV5d-QiErIJ6hakr0AIEr4_M7dYqshJmM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PATCH",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/file/updateFileName?fileId=948be974-ef8b-4c75-a08a-465f078fe0d5&fileName=dosyanin_yeni_ismi",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"updateFileName"
+					],
+					"query": [
+						{
+							"key": "fileId",
+							"value": "948be974-ef8b-4c75-a08a-465f078fe0d5"
+						},
+						{
+							"key": "fileName",
+							"value": "dosyanin_yeni_ismi"
+						}
+					]
+				},
+				"description": "Dosya ismini değiştirme işlemi. Token bilgisiyle gitmeliyiz. Eğer erişmeye çalıştığımız dosyanın sahibi biz değilsek ismini değiştiremeyiz, hata alırız."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/file/delete/f84f8a41-2d1e-4164-a039-bcf679c492bd",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTYzNjkzMzA5MiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2xvZ2luIiwiaWF0IjoxNjM2OTMxODkyfQ.E11fAYWBUMwV5d-QiErIJ6hakr0AIEr4_M7dYqshJmM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "id",
+						"value": "1",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "1",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/file/delete/f84f8a41-2d1e-4164-a039-bcf679c492bd",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"file",
+						"delete",
+						"f84f8a41-2d1e-4164-a039-bcf679c492bd"
+					],
+					"query": [
+						{
+							"key": "id",
+							"value": "1",
+							"disabled": true
+						}
+					]
+				},
+				"description": "Dosya silme işlemi. Token bilgisiyle gitmeliyiz. Dosyanın sahibi biz değilsek silme işlemi başarısız olur."
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:8080/user/1",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0ZXN0MSIsImV4cCI6MTYzNjkzNDM3NCwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL2xvZ2luIiwiaWF0IjoxNjM2OTMzMTc0fQ.ECY2MxU1f76UR7pEQZGautbQByC16cHeLC48cVvPpJM",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/user/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"1"
+					]
+				},
+				"description": "kullanıcı bilgisi getirme. Token bilgisiyle gitmeliyiz. Kullanıcının id bilgisiyle sorgulama yapılır, sadece username bilgisi döner. Başka kullanıcıların username bilgisi sorgulanabilir."
+			},
+			"response": []
+		}
+	]
+}
