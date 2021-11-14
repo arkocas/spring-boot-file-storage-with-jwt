@@ -1,4 +1,4 @@
-package com.alirizakocas.springbootfilestoragewithjwt;
+package com.alirizakocas.filestorage;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
