@@ -1,5 +1,7 @@
 package com.alirizakocas.filestorage.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -12,17 +14,20 @@ import java.util.Collection;
 
 
 @Entity
-@Table(name = "USER")
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "USER")
+@ApiModel(value = "User Api model documentation", description = "Model")
 public class User implements UserDetails {
 
+    @ApiModelProperty(value = "Unique id field of User object")
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ID")
     private long id;
 
+    @ApiModelProperty(value = "username field of User object")
     @NonNull
     @NotNull
     @Size(
@@ -30,9 +35,10 @@ public class User implements UserDetails {
             max = 45,
             message = "The username '${validatedValue}' must be between {min} and {max} characters long"
     )
-    @Column(name = "USERNAME", nullable = false, length = 100, unique = true)
+    @Column(name = "USERNAME", nullable = false, unique = true)
     private String username;
 
+    @ApiModelProperty(value = "password field of User object")
     @NonNull
     @NotNull
     @Size(
@@ -40,7 +46,7 @@ public class User implements UserDetails {
             max = 30,
             message = "The password '${validatedValue}' must be between {min} and {max} characters long"
     )
-    @Column(name = "PASSWORD", nullable = false, length = 100)
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     @Override

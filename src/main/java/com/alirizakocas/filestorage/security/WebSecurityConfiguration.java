@@ -44,7 +44,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable(); // csrfi disable ettik
-        http.authorizeRequests().antMatchers("/h2-console/**","/login","/user/create").permitAll(). // bu requestlere izin verdik
+        http.authorizeRequests().antMatchers("/h2-console/**","/login","/user/create","/v2/api-docs/**","/swagger-ui.html", "/webjars/springfox-swagger-ui/**", "/swagger-resources/**").permitAll(). // bu requestlere izin verdik
                 anyRequest().authenticated(); // login ile başlayan istekleri permit ettik ve h2 console'u açtık
 
         http.headers().frameOptions().disable(); // frame option'ı h2 console için disable ettik

@@ -1,5 +1,7 @@
 package com.alirizakocas.filestorage.model;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 import org.hibernate.annotations.GenericGenerator;
 
@@ -8,17 +10,20 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Table(name = "FILE")
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
+@Table(name = "FILE")
+@ApiModel(value = "File Api model documentation", description = "Model")
 public class File {
 
+    @ApiModelProperty(value = "Unique fileId field of File object")
     @Id
     @GeneratedValue(generator = "uuid")
     @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String fileId;
 
+    @ApiModelProperty(value = "username field of File object")
     @NonNull
     @NotNull
     @Size(
@@ -29,6 +34,7 @@ public class File {
     @JoinColumn(name = "USERNAME")
     private String username;
 
+    @ApiModelProperty(value = "fileName field of File object")
     @NonNull
     @NotNull
     @Size(
@@ -39,15 +45,19 @@ public class File {
     private String fileName;
 
     @NonNull
+    @ApiModelProperty(value = "fileContentType field of File object")
     private String fileContentType;
 
     @NonNull
+    @ApiModelProperty(value = "fileExtension field of File object")
     private String fileExtension;
 
     @NonNull
+    @ApiModelProperty(value = "fileSize field of File object")
     private long fileSize;
 
     @NonNull
+    @ApiModelProperty(value = "filePath field of File object")
     private String filePath;
 
 }
