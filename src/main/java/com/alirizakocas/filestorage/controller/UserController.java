@@ -1,5 +1,6 @@
 package com.alirizakocas.filestorage.controller;
 
+import com.alirizakocas.filestorage.dto.UserDTO;
 import com.alirizakocas.filestorage.message.ResponseMessage;
 import com.alirizakocas.filestorage.model.User;
 import com.alirizakocas.filestorage.service.UserService;
@@ -25,8 +26,10 @@ public class UserController {
     }
 
     @GetMapping("/{id}")
-    public User getUserById(@PathVariable long id){
-        return userService.getUserById(id);
+    public UserDTO getUserById(@PathVariable long id){
+        User userDetails = userService.getUserById(id);
+        UserDTO userDTO = new UserDTO(userDetails.getUsername());
+        return userDTO;
     }
 
 }
