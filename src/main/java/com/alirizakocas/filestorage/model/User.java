@@ -1,9 +1,14 @@
 package com.alirizakocas.filestorage.model;
 
 import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.Collection;
 
 
 @Entity
@@ -11,7 +16,7 @@ import javax.validation.constraints.Size;
 @Data
 @NoArgsConstructor
 @RequiredArgsConstructor
-public class User {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -37,5 +42,30 @@ public class User {
     )
     @Column(name = "PASSWORD", nullable = false, length = 100)
     private String password;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return new ArrayList<>();
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    } //false olursa User account has expired
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    } //false olursa user account is locked hatası alıyoruz.
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    } // false olursa User credentials have expired hatası alıyoruz.
+
+    @Override
+    public boolean isEnabled() {
+        return true;
+    } // false olursa user is disabled hatası dönüyor.
 }
 
