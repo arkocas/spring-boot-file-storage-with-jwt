@@ -30,7 +30,7 @@ public class User implements UserDetails {
             max = 45,
             message = "The username '${validatedValue}' must be between {min} and {max} characters long"
     )
-    @Column(name = "USERNAME", nullable = false, length = 100)
+    @Column(name = "USERNAME", nullable = false, length = 100, unique = true)
     private String username;
 
     @NonNull
