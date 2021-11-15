@@ -7,6 +7,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,9 +50,11 @@ public class FileController {
 
         File fileDetails = fileService.getFileById(fileId);
         Resource file = fileService.downloadFile(fileDetails);
+        String fileName = FilenameUtils.getExtension(fileDetails.getFileName()).equals("") ? (fileDetails.getFileName() + "." + fileDetails.getFileExtension()) : fileDetails.getFileName();
+
         return ResponseEntity.ok()
                 .contentType(MediaType.valueOf(fileDetails.getFileContentType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDetails.getFileName() + "\"").body(file);
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileName + "\"").body(file);
     }
 
     @DeleteMapping("/delete/{fileId}")
