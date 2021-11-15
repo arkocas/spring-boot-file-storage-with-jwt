@@ -51,7 +51,7 @@ public class FileController {
         Resource file = fileService.downloadFile(fileDetails);
         return ResponseEntity.ok()
                 .contentType(MediaType.valueOf(fileDetails.getFileContentType()))
-                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + file.getFilename() + "\"").body(file);
+                .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=\"" + fileDetails.getFileName() + "\"").body(file);
     }
 
     @DeleteMapping("/delete/{fileId}")
